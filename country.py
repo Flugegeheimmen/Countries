@@ -1,3 +1,6 @@
+import pickle
+
+
 class Country:
     def __init__(self, name, capital, established, area, population):
         self.name = name
@@ -42,6 +45,14 @@ class CountryContainer:
             self.countries[id] = country
             return True
         return False
+
+    def load_from_file(self, file):
+        f = open(file, 'rb+')
+        self.countries = pickle.load(f)
+
+    def save_to_file(self, file):
+        f = open(file, 'wb+')
+        pickle.dump(self.countries, f)
 
     def __repr__(self):
         return self.countries.__str__()
