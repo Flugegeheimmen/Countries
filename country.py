@@ -6,6 +6,9 @@ class Country:
         self.area = area
         self.population = population
 
+    def __str__(self):
+        return self.name
+
     def __repr__(self):
         return self.name
 
@@ -19,7 +22,7 @@ class CountryContainer:
     def search(self, key):
         search_date = []
         for id, country in enumerate(self.countries):
-            if key.lower() in country.name.lower():
+            if country and key.lower() in country.name.lower():
                 search_date.append([id, country])
         return search_date
 
@@ -29,13 +32,16 @@ class CountryContainer:
         return self.countries.append(country)
 
     def remove(self, id):
-        if 0 < id < len(self.countries):
+        if 0 <= id < len(self.countries):
             self.countries[id] = None
             return True
         return False
 
     def update(self, id, country):
-        if 0 < id < len(self.countries):
+        if 0 <= id < len(self.countries):
             self.countries[id] = country
             return True
         return False
+
+    def __repr__(self):
+        return self.countries.__str__()
